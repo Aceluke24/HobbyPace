@@ -1,4 +1,4 @@
-# Roster — landing page
+# HobbyPace — landing page
 
 Three files:
 - `index.html` — the landing page
