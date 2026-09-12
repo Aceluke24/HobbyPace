@@ -100,8 +100,35 @@
     max-width: 46ch;
     margin: 0 0 34px;
   }
-  .hero-art{ display:flex; justify-content:center; }
-  .hero-art img{ width: 100%; max-width: 480px; height: auto; display:block; }
+  .hero-art{ display:flex; justify-content:center; position:relative; }
+  .hero-art::before{
+    content:"";
+    position:absolute;
+    width:220px; height:220px;
+    top:-28px; right:8%;
+    border-radius:50%;
+    background: var(--blue-dim);
+    z-index:0;
+  }
+  .hero-art::after{
+    content:"";
+    position:absolute;
+    width:130px; height:130px;
+    bottom:-16px; left:4%;
+    border-radius:50%;
+    background: var(--green-dim);
+    z-index:0;
+  }
+  .hero-art img{
+    position:relative;
+    z-index:1;
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    display:block;
+    border-radius: 20px;
+    box-shadow: 0 24px 48px -18px rgba(51,41,29,0.3);
+  }
   .cta-row{ display:flex; align-items:center; gap:16px; flex-wrap: wrap; margin-bottom: 12px; }
 
   /* ---------- Buttons / form ---------- */
@@ -157,50 +184,82 @@
   .fine-print{ font-size: 0.85rem; color: var(--ink-dim); margin-top: 12px; }
 
   /* ---------- Problem strip ---------- */
-  .strip{ background: var(--surface); border-top: 1.5px solid var(--line); border-bottom: 1.5px solid var(--line); padding: 50px 0; }
+  .strip{ background: var(--surface); border-top: 1.5px solid var(--line); border-bottom: 1.5px solid var(--line); padding: 56px 0; }
   .strip .wrap{ display:grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items:start; }
   .strip h2{ font-family: var(--serif); font-weight: 500; font-size: 1.8rem; margin: 0; line-height: 1.25; }
-  .strip p{ color: var(--ink-dim); margin: 0; font-size: 1.02rem; }
+  .strip p{ color: var(--ink-dim); margin: 0; font-size: 1.02rem; border-left: 3px solid var(--blue-dim); padding-left: 22px; }
+
+  .eyebrow{
+    display:inline-block;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green);
+    background: var(--green-dim);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
 
   /* ---------- How it works ---------- */
-  .steps{ padding: 68px 0; }
+  .steps{ padding: 72px 0; }
   .steps h2{ font-family: var(--serif); font-weight: 500; font-size: 2rem; text-align:center; margin: 0 0 12px; }
+  .steps .eyebrow{ display:block; width:fit-content; margin-left:auto; margin-right:auto; }
   .steps > .wrap > p.sub{ text-align:center; color: var(--ink-dim); max-width: 52ch; margin: 0 auto 48px; }
   .step-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 32px; position:relative; }
-  .step-grid::before{
-    content:"";
-    position:absolute;
-    top:22px; left:16%; right:16%;
-    height:2px;
-    background: repeating-linear-gradient(to right, var(--line) 0 8px, transparent 8px 16px);
-    z-index:0;
+  .step{
+    position:relative;
+    z-index:1;
+    background: var(--surface);
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 30px 26px 28px;
+    box-shadow: 0 10px 24px -16px rgba(51,41,29,0.3);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
-  .step{ position:relative; z-index:1; background: var(--bg); padding-right: 8px; }
+  .step:hover{ transform: translateY(-4px); box-shadow: 0 16px 30px -16px rgba(51,41,29,0.35); }
   .step-num{
     width:44px; height:44px;
     border-radius:50%;
-    background: var(--surface);
-    border: 2px solid var(--green);
-    color: var(--green);
+    background: var(--green);
+    color: #F7F3EA;
     font-family: var(--serif);
     font-weight: 600;
     font-size: 1.1rem;
     display:flex; align-items:center; justify-content:center;
     margin-bottom: 18px;
+    box-shadow: 0 8px 16px -8px rgba(91,140,111,0.65);
   }
-  .step:nth-child(2) .step-num{ border-color: var(--blue); color: var(--blue); }
-  .step:nth-child(3) .step-num{ border-color: var(--green); color: var(--green); }
+  .step:nth-child(2) .step-num{ background: var(--blue); box-shadow: 0 8px 16px -8px rgba(91,132,166,0.65); }
+  .step:nth-child(3) .step-num{ background: var(--green); box-shadow: 0 8px 16px -8px rgba(91,140,111,0.65); }
   .step h3{ font-family: var(--serif); font-weight: 500; font-size: 1.15rem; margin: 0 0 8px; }
   .step p{ color: var(--ink-dim); margin: 0; font-size: 0.97rem; }
 
   /* ---------- Features ---------- */
-  .features{ background: var(--surface); border-top: 1.5px solid var(--line); border-bottom: 1.5px solid var(--line); padding: 68px 0; }
-  .features h2{ font-family: var(--serif); font-weight: 500; font-size: 2rem; text-align:center; margin: 0 0 46px; }
+  .features{ background: var(--surface); border-top: 1.5px solid var(--line); border-bottom: 1.5px solid var(--line); padding: 72px 0; }
+  .features h2{ font-family: var(--serif); font-weight: 500; font-size: 2rem; text-align:center; margin: 0 0 12px; }
+  .features .eyebrow{ display:block; width:fit-content; margin: 0 auto 16px; }
+  .features > .wrap > p.sub{ text-align:center; color: var(--ink-dim); max-width: 52ch; margin: 0 auto 46px; }
   .feature-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-  .feature{ padding-top: 18px; border-top: 3px solid var(--green); }
-  .feature:nth-child(2){ border-top-color: var(--blue); }
-  .feature:nth-child(3){ border-top-color: var(--green); }
-  .feature svg{ width: 34px; height: 34px; margin-bottom: 16px; }
+  .feature{
+    background: var(--bg);
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 30px 26px;
+    box-shadow: 0 10px 24px -18px rgba(51,41,29,0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .feature:hover{ transform: translateY(-4px); box-shadow: 0 16px 30px -16px rgba(51,41,29,0.3); }
+  .feature-icon{
+    width:52px; height:52px;
+    border-radius:50%;
+    background: var(--green-dim);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom: 18px;
+  }
+  .feature:nth-child(2) .feature-icon{ background: var(--blue-dim); }
+  .feature svg{ width: 26px; height: 26px; display:block; }
   .feature h3{ font-family: var(--serif); font-weight: 500; font-size: 1.2rem; margin: 0 0 10px; }
   .feature p{ color: var(--ink-dim); margin: 0; font-size: 0.98rem; }
 
@@ -215,6 +274,15 @@
     background: var(--green-dim);
     z-index:0;
   }
+  .final-cta-section::after{
+    content:"";
+    position:absolute;
+    bottom:-10px; left:6%;
+    width:130px; height:130px;
+    border-radius:50%;
+    background: var(--blue-dim);
+    z-index:0;
+  }
   .final-cta{
     position:relative;
     z-index:1;
@@ -225,6 +293,7 @@
     border-radius: 14px;
     padding: 52px 44px;
     text-align:center;
+    box-shadow: 0 30px 60px -24px rgba(51,41,29,0.3);
   }
   .final-cta h2{ font-family: var(--serif); font-weight: 500; font-size: 2rem; margin: 0 0 14px; }
   .final-cta p{ color: var(--ink-dim); max-width: 46ch; margin: 0 auto 30px; font-size: 1.05rem; }
@@ -232,16 +301,38 @@
   .final-cta .fine-print{ text-align:center; }
 
   footer{
-    border-top: 1.5px solid var(--line);
-    padding: 28px 0 40px;
-    color: var(--ink-dim);
-    font-size: 0.88rem;
-    display:flex;
-    justify-content:space-between;
-    flex-wrap: wrap;
-    gap: 10px;
+    background: var(--ink);
+    border-top: 3px solid var(--green);
+    padding: 44px 0 30px;
     position: relative;
     z-index: 1;
+  }
+  .footer-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  .footer-brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #F7F3EA;
+  }
+  .footer-brand svg{ width:22px; height:22px; flex-shrink:0; }
+  .footer-links{ display:flex; align-items:center; gap: 28px; font-size: 0.92rem; }
+  .footer-links a{ color: #D8CBB3; text-decoration:none; transition: color 0.15s ease; }
+  .footer-links a:hover{ color: #F7F3EA; }
+  footer .fine{
+    margin: 22px 0 0;
+    padding-top: 20px;
+    border-top: 1px solid rgba(247,243,234,0.12);
+    font-size: 0.82rem;
+    color: #9C8F73;
   }
 
   @media (max-width: 760px){
@@ -250,7 +341,6 @@
     .hero-art img{ max-width: 300px; }
     .strip .wrap{ grid-template-columns: 1fr; gap: 20px; }
     .step-grid{ grid-template-columns: 1fr; gap: 30px; }
-    .step-grid::before{ display:none; }
     .feature-grid{ grid-template-columns: 1fr; gap: 30px; }
     .final-cta{ padding: 40px 24px; }
     form.capture{ flex-direction: column; }
@@ -292,13 +382,17 @@
 
 <section class="strip">
   <div class="wrap">
-    <h2>Your backlog isn't a discipline problem. It's a tracking problem.</h2>
+    <div>
+      <span class="eyebrow">The problem</span>
+      <h2>Your backlog isn't a discipline problem. It's a tracking problem.</h2>
+    </div>
     <p>You've got twelve games on Steam, a Kindle full of samples, a "watch later" list nobody's ever finished, and no single place that shows you all of it — let alone a plan for getting through it. So it just sits there, growing. Roster gives your whole backlog one home, and turns "someday" into a weekly goal you'll actually hit.</p>
   </div>
 </section>
 
 <section class="steps" id="how">
   <div class="wrap">
+    <span class="eyebrow">Three steps</span>
     <h2>How Roster works</h2>
     <p class="sub">Three steps, and your backlog stops being a source of guilt and starts being a list you actually clear.</p>
     <div class="step-grid">
@@ -323,20 +417,21 @@
 
 <section class="features">
   <div class="wrap">
+    <span class="eyebrow">Why Roster</span>
     <h2>Built to get things finished, not just filed</h2>
     <div class="feature-grid">
       <div class="feature">
-        <svg viewBox="0 0 34 34" fill="none"><rect x="4" y="4" width="11" height="11" rx="2" stroke="#5B8C6F" stroke-width="1.8"/><rect x="19" y="4" width="11" height="11" rx="2" stroke="#5B84A6" stroke-width="1.8"/><rect x="4" y="19" width="11" height="11" rx="2" stroke="#5B84A6" stroke-width="1.8"/><rect x="19" y="19" width="11" height="11" rx="2" stroke="#5B8C6F" stroke-width="1.8"/></svg>
+        <div class="feature-icon"><svg viewBox="0 0 34 34" fill="none"><rect x="4" y="4" width="11" height="11" rx="2" stroke="#5B8C6F" stroke-width="1.8"/><rect x="19" y="4" width="11" height="11" rx="2" stroke="#5B84A6" stroke-width="1.8"/><rect x="4" y="19" width="11" height="11" rx="2" stroke="#5B84A6" stroke-width="1.8"/><rect x="19" y="19" width="11" height="11" rx="2" stroke="#5B8C6F" stroke-width="1.8"/></svg></div>
         <h3>One home for every hobby</h3>
         <p>Games, books, TV shows, movies, and anything else you're into, side by side on a single dashboard — so nothing quietly falls off your radar.</p>
       </div>
       <div class="feature">
-        <svg viewBox="0 0 34 34" fill="none"><circle cx="17" cy="17" r="13" stroke="#5B84A6" stroke-width="1.8"/><path d="M17 9v8l6 3" stroke="#5B84A6" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <div class="feature-icon"><svg viewBox="0 0 34 34" fill="none"><circle cx="17" cy="17" r="13" stroke="#5B84A6" stroke-width="1.8"/><path d="M17 9v8l6 3" stroke="#5B84A6" stroke-width="1.8" stroke-linecap="round"/></svg></div>
         <h3>Goals that fit your real week</h3>
         <p>Roster reads your actual availability and sets a pace you can keep — not a generic streak that breaks the first busy Tuesday.</p>
       </div>
       <div class="feature">
-        <svg viewBox="0 0 34 34" fill="none"><path d="M17 5c5 4 10 7 10 14a10 10 0 01-20 0c0-7 5-10 10-14z" stroke="#5B8C6F" stroke-width="1.8"/></svg>
+        <div class="feature-icon"><svg viewBox="0 0 34 34" fill="none"><path d="M17 5c5 4 10 7 10 14a10 10 0 01-20 0c0-7 5-10 10-14z" stroke="#5B8C6F" stroke-width="1.8"/></svg></div>
         <h3>Nudges, not nagging</h3>
         <p>A quiet check-in when something's gone stale in your list — never a guilt trip, always a five-second way to pick it back up.</p>
       </div>
@@ -346,6 +441,7 @@
 
 <section class="final-cta-section wrap" id="notify">
   <div class="final-cta">
+    <span class="eyebrow">Early access</span>
     <h2>Be first through the door</h2>
     <p>Join the early list and we'll email you the moment Roster is ready — plus early access before it opens to everyone else.</p>
     <form class="capture" id="signup-form" action="https://script.google.com/macros/s/AKfycbw98GNrWdrHhie5l97_F1hOC7-giSFQWPYU2tRT823K92rJ0xTGBVS8w28MU5B5_1ju/exec" method="POST" target="hidden_iframe">
@@ -360,9 +456,23 @@
      response isn't meant to be shown to visitors. -->
 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
-<footer class="wrap">
-  <span>© 2026 Roster. Built for people with too many tabs open.</span>
-  <span>hello@getroster.app</span>
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <div class="footer-brand">
+        <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="13" cy="13" r="11.5" stroke="#5B8C6F" stroke-width="1.8"/>
+          <path d="M8 13.5l3.3 3.3L18 9.5" stroke="#5B8C6F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Roster
+      </div>
+      <div class="footer-links">
+        <a href="#notify">Notify me</a>
+        <a href="mailto:hello@getroster.app">hello@getroster.app</a>
+      </div>
+    </div>
+    <p class="fine">© 2026 Roster. Built for people with too many tabs open.</p>
+  </div>
 </footer>
 
 <script>
